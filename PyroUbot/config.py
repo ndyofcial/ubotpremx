@@ -11,7 +11,7 @@ API_ID = int(os.getenv("API_ID", "23117267"))
 
 API_HASH = os.getenv("API_HASH", "0e3230b3f1f8c32d66b95fa1853a5b26")
 
-BOT_TOKEN = os.getenv("BOT_TOKEN", "7912592305:AAEx_eYbV7F4b90w9jxN8sGqGWbCy3FyvpQ")
+BOT_TOKEN = os.getenv("BOT_TOKEN", "7912592305:AAFrtR1zvYe1CKlUuX5QClgZNAvhHzakCBU")
 
 OWNER_ID = int(os.getenv("OWNER_ID", "5850202522"))
 
@@ -19,7 +19,7 @@ BLACKLIST_CHAT = list(map(int, os.getenv("BLACKLIST_CHAT", "-1002125842026 -1002
 
 RMBG_API = os.getenv("RMBG_API", "ybwGCgqJngeYGQLiWAjxrYoz")
 
-MONGO_URL = os.getenv("MONGO_URL", "mongodb+srv://akmalwiratamaghts:akmalwiratamaghts@cluster0.ns1mhqv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+MONGO_URL = os.getenv("MONGO_URL", "mongodb+srv://ammah3407:ammah3407@cluster0.jm65gvv.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 
 LOGS_MAKER_UBOT = os.getenv("LOGS_MAKER_UBOT", "-1002791340508")
 
