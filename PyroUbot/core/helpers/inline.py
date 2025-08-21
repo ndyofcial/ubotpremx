@@ -136,45 +136,34 @@ class BTN:
     def START(message):
         if not message.from_user.id == OWNER_ID:
             button = [
-                [InlineKeyboardButton("⦪ ᴛʀɪᴀʟ ⦫", callback_data="trial")],  
-            [  
-                InlineKeyboardButton("⦪ ʙᴜᴀᴛ ᴜꜱᴇʀʙᴏᴛ ⦫", callback_data="bahan"),  
-                InlineKeyboardButton("⦪ ʀᴇsᴇᴛ ᴘʀᴇғɪx ⦫", callback_data="resetprefix")  
-            ],  
-            [  
-                InlineKeyboardButton("⦪ ᴄᴇᴋ ɪᴅ ⦫", url="t.me/CekID_tele_bot")  
-            ],  
-            [                  
-                InlineKeyboardButton("⦪ ᴄᴇᴋ ʟɪᴍɪᴛ ⦫", url="t.me/SpamBot")  
-            ],  
-            [  
-                InlineKeyboardButton("⦪ ʀᴇᴘᴏ ᴜsᴇʀʙᴏᴛ ⦫", url="t.me/informationndy"),   
-                InlineKeyboardButton("⦪ ʜᴇʟᴘ ᴍᴇɴᴜ ⦫", callback_data="help_back")  
-            ],  
-            [InlineKeyboardButton("⦪ sᴜᴘᴘᴏʀᴛ ⦫", callback_data="support")]  
-        ]  
-    else:  
-        button = [  
-            [  
-                InlineKeyboardButton("⦪ ʙᴜᴀᴛ ᴜsᴇʀʙᴏᴛ ⦫", callback_data="bahan")  
-            ],  
-            [  
-                InlineKeyboardButton("⦪ ɢɪᴛᴘᴜʟʟ ⦫", callback_data="cb_gitpull"),  
-                InlineKeyboardButton("⦪ ʀᴇsᴛᴀʀᴛ ⦫", callback_data="cb_restart")  
-            ],  
-            [  
-                InlineKeyboardButton("⦪ ᴄᴇᴋ ɪᴅ ⦫", url="t.me/CekID_tele_bot")  
-            ],  
-            [                  
-                InlineKeyboardButton("⦪ ᴄᴇᴋ ʟɪᴍɪᴛ ⦫", url="t.me/SpamBot")       
-            ],  
-            [                 
-                InlineKeyboardButton("⦪ ʀᴇsᴇᴛ ᴘʀᴇғɪx ⦫", callback_data="resetprefix"),  
-                InlineKeyboardButton("⦪ ʜᴇʟᴘ ᴍᴇɴᴜ ⦫", callback_data="help_back")  
-            ],  
-            [  
-                InlineKeyboardButton("⦪ ʟɪsᴛ ᴜsᴇʀʙᴏᴛ ⦫", callback_data="cek_ubot")  
-            ]  
+                [InlineKeyboardButton("⦪ ᴛʀɪᴀʟ ⦫", callback_data="trial")],
+                [
+                    InlineKeyboardButton("⦪ ʙᴇʟɪ ᴜꜱᴇʀʙᴏᴛ ⦫", callback_data="bahan"),
+                    InlineKeyboardButton("⦪ ʀᴇsᴇᴛ ᴘʀᴇғɪx ⦫", callback_data="resetprefix")
+                ],
+                [
+                    InlineKeyboardButton("⳹ ʀᴇᴘᴏ ᴜsᴇʀʙᴏᴛ ⳼", url="t.me/moire_marketx"), 
+                    InlineKeyboardButton("⳹ ᴏᴡɴᴇʀ ⳼", url="t.me/moire_mor")
+                ],
+                [
+                    InlineKeyboardButton("⦪ ʙᴜᴀᴛ ᴜsᴇʀʙᴏᴛ ⳼", callback_data="buat_ubot"),
+                    InlineKeyboardButton("⦪ ʜᴇʟᴘ ᴍᴇɴᴜ ⦫", callback_data="help_back")
+                ],
+                [InlineKeyboardButton("⦪ sᴜᴘᴘᴏʀᴛ ⦫", callback_data="support")]
+            ]
+        else:
+            button = [
+                [
+                    InlineKeyboardButton("⦪ ʙᴜᴀᴛ ᴜsᴇʀʙᴏᴛ ⦫", callback_data="bahan"),
+                    InlineKeyboardButton("⦪ ʀᴇsᴇᴛ ᴘʀᴇғɪx ⦫", callback_data="resetprefix")
+                ],
+                [
+                    InlineKeyboardButton("⦪ ɢɪᴛᴘᴜʟʟ ⦫", callback_data="cb_gitpull"),
+                    InlineKeyboardButton("⦪ ʀᴇsᴛᴀʀᴛ ⦫", callback_data="cb_restart")
+                ],
+                [
+                    InlineKeyboardButton("⦪ ʟɪsᴛ ᴜsᴇʀʙᴏᴛ ⦫", callback_data="cek_ubot")
+                ]
             ]
         return button
 
