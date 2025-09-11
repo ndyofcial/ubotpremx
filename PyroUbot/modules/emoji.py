@@ -155,53 +155,83 @@ async def _(client, message):
     prs = await EMO.PROSES(client)
     brhsl = await EMO.BERHASIL(client)
     ggl = await EMO.GAGAL(client)
+
     try:
         msg = await message.reply(f"{prs}memproses...", quote=True)
 
-        if not client.me.is_premium:
+        query_mapping = {
+            "pong": "EMOJI_PING",
+            "owner": "EMOJI_MENTION",
+            "ubot": "EMOJI_USERBOT",
+            "proses": "EMOJI_PROSES",
+            "gcast": "EMOJI_BROADCAST",
+            "sukses": "EMOJI_BERHASIL",
+            "gagal": "EMOJI_GAGAL",
+            "catatan": "EMOJI_KETERANGAN",
+            "group": "EMOJI_GROUP",
+            "menunggu": "EMOJI_MENUNGGU",
+            "alasan": "EMOJI_ALASAN",
+            "waktu": "EMOJI_WAKTU",
+            "afk": "EMOJI_AFKA",
+        }
+
+        parts = message.text.split(maxsplit=3)
+        if len(parts) < 3:
             return await msg.edit(
-                f"{ggl}beli prem dulu anjg"
+                f"{ggl}format salah!\n\n"
+                f"Contoh:\n"
+                f"- `.emoji set proses ⏳` (emoji biasa)\n"
+                f"- reply emoji premium → `.emoji set proses`"
             )
 
-        if len(message.command) < 3:
-            return await msg.edit(f"{ggl}tolong masukkan query dan valeu nya")
+        action, mapping = parts[1].lower(), parts[2].lower()
+        value = parts[3] if len(parts) > 3 else None
 
-        query_mapping = {
-          "pong": "EMOJI_PING",
-          "owner": "EMOJI_MENTION",
-          "ubot": "EMOJI_USERBOT",
-          "proses": "EMOJI_PROSES",
-          "gcast": "EMOJI_BROADCAST",
-          "sukses": "EMOJI_BERHASIL",
-          "gagal": "EMOJI_GAGAL",
-          "catatan": "EMOJI_KETERANGAN",
-          "group": "EMOJI_GROUP",
-          "menunggu": "EMOJI_MENUNGGU",
-          "alasan": "EMOJI_ALASAN",
-          "waktu": "EMOJI_WAKTU",
-          "afk": "EMOJI_AFKA",
-        }
-        command, mapping, value = message.command[:3]
+        if action != "set":
+            return await msg.edit(f"{ggl}gunakan format: `.emoji set [mapping] [emoji]`")
 
-        if mapping.lower() in query_mapping:
-            query_var = query_mapping[mapping.lower()]
-            emoji_id = None
-            if message.entities:
-                for entity in message.entities:
-                    if entity.custom_emoji_id:
-                        emoji_id = entity.custom_emoji_id
-                        break
+        if mapping not in query_mapping:
+            return await msg.edit(f"{ggl}mapping `{mapping}` tidak ditemukan")
 
-            if emoji_id:
-                await set_vars(client.me.id, query_var, emoji_id)
-                await msg.edit(
-                    f"{brhsl}emoJi berhasil di setting ke: <emoji id={emoji_id}>{value}</emoji>"
+        query_var = query_mapping[mapping]
+
+        # Case 1 → reply premium emoji
+        if message.reply_to_message and message.reply_to_message.entities:
+            for entity in message.reply_to_message.entities:
+                if entity.custom_emoji_id:
+                    emoji_id = entity.custom_emoji_id
+                    await set_vars(client.me.id, query_var, emoji_id)
+                    try:
+                        return await msg.edit(
+                            f"{brhsl}emoji premium berhasil di set ke: "
+                            f"<emoji id={emoji_id}>⭐️</emoji>\n"
+                            f"🆔 ID: <code>{emoji_id}</code>"
+                        )
+                    except Exception:
+                        return await message.reply(
+                            f"{brhsl}emoji premium berhasil di set ke: "
+                            f"<emoji id={emoji_id}>⭐️</emoji>\n"
+                            f"🆔 ID: <code>{emoji_id}</code>"
+                        )
+
+        # Case 2 → argumen emoji biasa
+        if value:
+            char = value[0]
+            unicode_code = f"U+{ord(char):X}"
+            await set_vars(client.me.id, query_var, char)
+            try:
+                return await msg.edit(
+                    f"{brhsl}emoji biasa berhasil di set ke: {char}\n"
+                    f"🆔 Unicode: <code>{unicode_code}</code>"
                 )
-            else:
-                await msg.edit(f"{ggl}tidak dapat menemukan emoji premium")
-        else:
-            await msg.edit(f"{ggl}mapping tidak ditemukan")
+            except Exception:
+                return await message.reply(
+                    f"{brhsl}emoji biasa berhasil di set ke: {char}\n"
+                    f"🆔 Unicode: <code>{unicode_code}</code>"
+                )
+
+        return await msg.edit(f"{ggl}tidak menemukan emoji untuk diset")
 
     except Exception as error:
-        await msg.edit(str(error))
+        await msg.edit(f"{ggl}{str(error)}")
 
